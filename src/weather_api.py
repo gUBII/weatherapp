@@ -3,7 +3,7 @@ import pandas as pd
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 import streamlit as st
-from .weather_codes import WMO_WEATHER_CODES
+from weather_codes import WMO_WEATHER_CODES
 
 def fetch_city_weather(city: str, lat: float, lon: float) -> dict | None:
     url = "https://api.open-meteo.com/v1/forecast"

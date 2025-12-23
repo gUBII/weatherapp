@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-from .config import CITIES
-from .weather_api import fetch_all_weather_cached, fetch_city_weather
-from .gis import (
+from config import CITIES
+from weather_api import fetch_all_weather_cached, fetch_city_weather
+from gis import (
     load_geojson_bytes,
     aggregate_points_to_polygons_shapely,
     haversine_km,
     HAS_SHAPELY,
 )
-from .ui import (
+from ui import (
     create_thermodynamic_gauges,
     create_weather_map,
     apply_filters,
@@ -117,9 +117,19 @@ def main():
             default=sorted(df["city"].unique().tolist()),
         )
 
+        def _ensure_range(min_val, max_val, step):
+            # Streamlit sliders require min < max.
+            if min_val == max_val:
+                return min_val, min_val + step
+            return min_val, max_val
+
         tmin, tmax = float(df["temperature"].min()), float(df["temperature"].max())
         hmin, hmax = int(df["humidity"].min()), int(df["humidity"].max())
         wmin, wmax = float(df["wind_speed"].min()), float(df["wind_speed"].max())
+
+        tmin, tmax = _ensure_range(tmin, tmax, 0.1)
+        hmin, hmax = _ensure_range(hmin, hmax, 1)
+        wmin, wmax = _ensure_range(wmin, wmax, 0.1)
 
         temp_range = st.slider(
             "Temperature (°C)",
