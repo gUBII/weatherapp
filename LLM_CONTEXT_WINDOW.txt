@@ -1,0 +1,13 @@
+The user wants to switch from OpenWeatherMap to Open-Meteo as the weather data provider.
+This means the application needs to be refactored to use the Open-Meteo API instead of the OpenWeatherMap API.
+The Open-Meteo API does not require an API key.
+The endpoint for current weather is: `https://api.open-meteo.com/v1/forecast`
+The parameters are `latitude`, `longitude`, and `current_weather=true`.
+The core functionality of the weather app should be maintained.
+This includes:
+- Displaying weather data for major cities in Bangladesh.
+- GIS features like overlaying boundary layers, drawing areas of interest (AOI), and generating choropleth maps.
+- A world map with city markers and a heatmap.
+- Thermodynamic gauges for temperature, humidity, and pressure.
+- Filtering capabilities.
+- Downloading filtered data.
