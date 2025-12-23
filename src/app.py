@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 from datetime import datetime
 
-from src.config import CITIES
-from src.weather_api import fetch_all_weather_cached, fetch_city_weather
-from src.gis import (
+from .config import CITIES
+from .weather_api import fetch_all_weather_cached, fetch_city_weather
+from .gis import (
     load_geojson_bytes,
     aggregate_points_to_polygons_shapely,
     haversine_km,
     HAS_SHAPELY,
 )
-from src.ui import (
+from .ui import (
     create_thermodynamic_gauges,
     create_weather_map,
     apply_filters,
